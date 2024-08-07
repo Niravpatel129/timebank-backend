@@ -13,11 +13,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to our public API!');
 });
 
-app.get('/api/version', (req, res) => {
+app.get('/version', (req, res) => {
   res.json({ version: '1.0.0' });
 });
 
-app.use('/api/update', updateRoutes);
+app.use('/update', updateRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
