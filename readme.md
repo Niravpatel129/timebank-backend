@@ -54,7 +54,7 @@ The server will start running on `http://localhost:8004`.
 
 ## Authors
 
-- Your Name
+- Nirav Patel
 
 ## License
 
