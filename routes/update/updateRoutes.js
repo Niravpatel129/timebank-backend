@@ -8,10 +8,10 @@ router.put('/:id', (req, res) => {
   res.json({ message: `Resource with id ${id} updated successfully` });
 });
 
-router.get('/:platform', (req, res) => {
+router.get('/:platform/:version', (req, res) => {
   const platform = req.params.platform;
-
-  res.json({ version: '1.0.0', platform: platform });
+  const version = req.params.version;
+  res.json({ version: '1.0.0', platform: platform, version: version });
 });
 
 // Partial update (PATCH) for a specific resource
