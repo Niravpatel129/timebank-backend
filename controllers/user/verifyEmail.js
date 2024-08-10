@@ -6,13 +6,13 @@ const verifyEmail = async (req, res) => {
 
     const user = await User.findOne({ email, verificationCode }).select('-password');
     if (!user) {
-      return res.status(400).json({ message: 'Invalid verification code' });
+      return res.status(400).json({ message: 'Invalid verification code', isVerified: false });
     }
 
     user.emailVerified = true;
     await user.save();
 
-    res.status(201).json({ message: 'Email verified successfully', user });
+    res.status(201).json({ message: 'Email verified successfully', isVerified: true, user });
   } catch (error) {
     console.error('Error in verifyEmail:', error);
     res.status(500).json({ message: 'Server error' });
