@@ -2,22 +2,26 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8004;
-const updateRoutes = require('./routes/update/updateRoutes');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Allow all origins
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
+// app use userRoutes
+app.use('/user', require('./routes/user/userRoutes'));
+
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Error connecting to MongoDB:', err));
+
 // Public API routes
 app.get('/', (req, res) => {
   res.send('Welcome to our public API!');
 });
-
-app.get('/version', (req, res) => {
-  res.json({ version: '1.0.0' });
-});
-
-app.use('/update', updateRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
