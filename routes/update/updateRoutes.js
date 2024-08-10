@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const latestVersion = '1.0.1';
+const downloadUrl = 'https://your-download-url.com/YourApp-1.0.1.zip';
+
 // Update a specific resource
 router.put('/:id', (req, res) => {
   const id = req.params.id;
@@ -9,9 +12,18 @@ router.put('/:id', (req, res) => {
 });
 
 router.get('/:platform/:version', (req, res) => {
-  const platform = req.params.platform;
-  const version = req.params.version;
-  res.json({ version: '1.0.0', platform: platform, version: version });
+  const { platform, version } = req.params;
+
+  if (version !== latestVersion) {
+    res.json({
+      url: downloadUrl,
+      name: `v${latestVersion}`,
+      notes: 'New features and bug fixes',
+      pub_date: new Date().toISOString(),
+    });
+  } else {
+    res.status(204).end();
+  }
 });
 
 // Partial update (PATCH) for a specific resource
