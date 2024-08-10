@@ -4,6 +4,11 @@ const User = require('../models/userModel');
 const authenticateUser = async (req, res, next) => {
   console.log('🚀  req:', req);
   console.log('Entering authenticateUser middleware');
+  if (!process.env.JWT_SECRET) {
+    console.log('JWT_SECRET is not set');
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+
   try {
     // Get token from header
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -17,6 +22,7 @@ const authenticateUser = async (req, res, next) => {
     // Verify token
     console.log('Verifying token');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
     console.log('Token verified, decoded userId:', decoded.id);
 
     // Find user by id
