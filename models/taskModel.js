@@ -11,8 +11,9 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    filterCategory: {
+    listType: {
       type: String,
+      default: 'currentWeek',
     },
     taskDuration: {
       type: Number,
