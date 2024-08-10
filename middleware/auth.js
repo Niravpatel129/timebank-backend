@@ -23,14 +23,15 @@ const authenticateUser = async (req, res, next) => {
     console.log('Verifying token');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    console.log('Token verified, decoded userId:', decoded.id);
+    console.log('Token verified, decoded:', decoded);
+    console.log('Decoded userId:', decoded.userId);
 
     // Find user by id
-    console.log('Finding user by id:', decoded.id);
-    const user = await User.findById(decoded.id).select('-password');
+    console.log('Finding user by id:', decoded.userId);
+    const user = await User.findById(decoded.userId).select('-password');
 
     if (!user) {
-      console.log('No user found for id:', decoded.id);
+      console.log('No user found for id:', decoded.userId);
       return res.status(401).json({ message: 'Token is not valid' });
     }
 
