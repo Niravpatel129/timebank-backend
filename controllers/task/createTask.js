@@ -4,6 +4,7 @@ const createTask = async (req, res) => {
   try {
     const { name, category, taskDuration, status, date } = req.body;
     const userId = req.user.id; // Assuming user ID is available in req.user after authentication
+    const initalTaskDuration = taskDuration;
 
     const newTask = new Task({
       name,
@@ -14,7 +15,7 @@ const createTask = async (req, res) => {
       user: userId,
       timerState: {
         startTime: null,
-        remainingTime: taskDuration,
+        remainingTime: initalTaskDuration,
         isPaused: false,
       },
     });
