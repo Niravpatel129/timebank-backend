@@ -12,6 +12,11 @@ const createTask = async (req, res) => {
       status,
       date,
       user: userId,
+      timerState: {
+        startTime: null,
+        remainingTime: taskDuration,
+        isPaused: false,
+      },
     });
 
     const savedTask = await newTask.save();

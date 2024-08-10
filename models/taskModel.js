@@ -22,12 +22,24 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['not-started', 'inProgress', 'paused', 'completed'],
       default: 'not-started',
     },
     timeSpent: {
       type: Number,
       default: 0,
+    },
+    timerState: {
+      isActive: {
+        type: Boolean,
+        default: false,
+      },
+      startTime: {
+        type: Date,
+      },
+      remainingTime: {
+        type: Number,
+        default: 0,
+      },
     },
     date: {
       type: Date,
