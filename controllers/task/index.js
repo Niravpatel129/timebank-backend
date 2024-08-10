@@ -3,4 +3,5 @@ module.exports = {
   createTask: require('./createTask'),
   deleteTask: require('./deleteTask'),
   updateTaskStatus: require('./updateTaskStatus'),
+  updateTask: require('./updateTask.js'),
 };
