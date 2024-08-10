@@ -4,9 +4,14 @@ const app = express();
 const port = process.env.PORT || 8004;
 const mongoose = require('mongoose');
 require('dotenv').config();
+const credentials = require('./middleware/credentials');
+
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
 
 // Allow all origins
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
 // app use userRoutes
