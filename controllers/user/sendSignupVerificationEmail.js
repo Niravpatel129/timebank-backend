@@ -5,6 +5,11 @@ const sendSignupVerificationEmail = async (req, res) => {
   try {
     const { name, email, onboardingData } = req.body;
 
+    // if name or email is missing, return 400
+    if (!name || !email) {
+      return res.status(400).json({ message: 'Name and email are required' });
+    }
+
     const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
 
     // Create a new user with pending status
