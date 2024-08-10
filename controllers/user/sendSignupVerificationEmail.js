@@ -11,22 +11,30 @@ const sendSignupVerificationEmail = async (req, res) => {
     }
 
     const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
-    // random password
-    const password =
-      Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-    // Create a new user with pending status
-    const newUser = new User({
-      name,
-      email,
-      verificationCode,
-      password,
-      status: 'pending',
-      onboardingData,
-    });
+    // Check if user already exists
+    let user = await User.findOne({ email });
 
-    // Save the user to the database
-    await newUser.save();
+    if (user) {
+      // If user exists, update the verification code
+      user.verificationCode = verificationCode;
+      await user.save();
+    } else {
+      // If user doesn't exist, create a new user with pending status
+      const password =
+        Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+      user = new User({
+        name,
+        email,
+        verificationCode,
+        password,
+        status: 'pending',
+        onboardingData,
+      });
+
+      await user.save();
+    }
 
     await sendEmail(email, 'signupVerificationEmail', {
       verificationCode,
@@ -34,9 +42,9 @@ const sendSignupVerificationEmail = async (req, res) => {
       verificationUrl: `https://www.hourblock.com/verify-email?code=${verificationCode}`,
     });
 
-    res.status(201).json({ message: 'User created and verification email sent successfully' });
+    res.status(200).json({ message: 'Verification email sent successfully' });
   } catch (error) {
-    console.error('Error in creating user and sending verification email:', error);
+    console.error('Error in sending verification email:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
