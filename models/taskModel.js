@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
   {
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,
@@ -19,8 +24,12 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['not-started', 'in-progress', 'completed'],
+      enum: ['not-started', 'inProgress', 'paused', 'completed'],
       default: 'not-started',
+    },
+    timeSpent: {
+      type: Number,
+      default: 0,
     },
     date: {
       type: Date,
