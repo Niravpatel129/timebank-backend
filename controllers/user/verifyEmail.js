@@ -24,7 +24,8 @@ const verifyEmail = async (req, res) => {
     res.status(201).json({
       message: 'Email verified successfully',
       isVerified: true,
-      user: { ...user, authToken },
+      user: user,
+      authToken: authToken,
     });
   } catch (error) {
     console.error('Error in verifyEmail:', error);
