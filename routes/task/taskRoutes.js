@@ -7,6 +7,8 @@ const {
   deleteTask,
   updateTaskStatus,
   updateTask,
+  startTaskTimer,
+  stopTaskTimer,
 } = require('../../controllers/task');
 
 // Get all tasks
@@ -23,5 +25,11 @@ router.patch('/:id/status', authenticateUser, updateTaskStatus);
 
 // update task
 router.put('/:id', authenticateUser, updateTask);
+
+// start task timer
+router.post('/:id/start', authenticateUser, startTaskTimer);
+
+// stop task timer
+router.post('/:id/stop', authenticateUser, stopTaskTimer);
 
 module.exports = router;
