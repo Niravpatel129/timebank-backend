@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  onboardingData: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {},
+  },
   createdAt: {
     type: Date,
     default: Date.now,
