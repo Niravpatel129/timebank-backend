@@ -11,6 +11,9 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    filterCategory: {
+      type: String,
+    },
     taskDuration: {
       type: Number,
       required: false,
