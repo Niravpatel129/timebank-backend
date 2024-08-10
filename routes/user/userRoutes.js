@@ -11,6 +11,6 @@ const {
 router.get('/:id', getUser);
 router.post('/register', registerUser);
 router.post('/send-verification', sendSignupVerificationEmail);
-router.get('/is-verified/:email', isVerified);
+router.get('/check-verification/:email', isVerified);
 
 module.exports = router;
