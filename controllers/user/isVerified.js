@@ -15,8 +15,7 @@ const isVerified = async (req, res) => {
 
     if (user.emailVerified) {
       const authToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-      response.user = user;
-      response.authToken = authToken;
+      response.user = { ...user, authToken };
     }
 
     res.status(200).json(response);
