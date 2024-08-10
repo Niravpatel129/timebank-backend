@@ -11,12 +11,16 @@ const sendSignupVerificationEmail = async (req, res) => {
     }
 
     const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
+    // random password
+    const password =
+      Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
     // Create a new user with pending status
     const newUser = new User({
       name,
       email,
       verificationCode,
+      password,
       status: 'pending',
       onboardingData,
     });
