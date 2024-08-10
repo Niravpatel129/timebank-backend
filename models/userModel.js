@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  verificationCode: {
+    type: String,
+  },
   onboardingData: {
     type: mongoose.Schema.Types.Mixed,
     default: {},
