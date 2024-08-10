@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
   {
-    id: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     name: {
       type: String,
       required: true,
@@ -14,12 +9,11 @@ const taskSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      required: true,
-      trim: true,
+      required: false,
     },
     taskDuration: {
       type: Number,
-      required: true,
+      required: false,
       min: 0,
     },
     status: {
