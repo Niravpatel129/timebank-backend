@@ -11,6 +11,7 @@ const createProject = async (req, res) => {
       name: rest.name,
       members: rest.members,
       creator: req.user.id,
+      projectColor: rest.projectColor,
     });
 
     const savedProject = await newProject.save();
