@@ -44,6 +44,7 @@ const sendSignupVerificationEmail = async (req, res) => {
       const defaultProject = new Project({
         name: `${user.name}'s Project`,
         members: [{ user: user._id, role: 'owner' }],
+        owner: user._id,
       });
 
       user.defaultProject = defaultProject._id;
