@@ -2,9 +2,11 @@ const Project = require('../../models/projectModel');
 
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find({ user: req.user.id });
+    console.log('🚀  req.user._id:', req.user._id);
+    const projects = await Project.find({ members: { $elemMatch: { user: req.user._id } } });
 
     if (!projects.length) {
+      console.log('🚀  no projects:', projects);
       return res.status(404).json({ message: 'No projects found for this user' });
     }
 

@@ -2,13 +2,15 @@ const Project = require('../../models/projectModel');
 
 const createProject = async (req, res) => {
   try {
-    const { name, description } = req.body;
+    const { ...rest } = req.body;
+    console.log('🚀  rest:', rest);
 
     // Assuming the user ID is stored in req.user.id after authentication
     const newProject = new Project({
-      name,
-      description,
       user: req.user.id,
+      name: rest.name,
+      members: rest.members,
+      creator: req.user.id,
     });
 
     const savedProject = await newProject.save();

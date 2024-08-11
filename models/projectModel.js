@@ -7,25 +7,22 @@ const projectSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    description: {
-      type: String,
-      trim: true,
-    },
+
     status: {
       type: String,
       enum: ['not-started', 'in-progress', 'completed'],
       default: 'not-started',
     },
-    startDate: {
-      type: Date,
-    },
-    endDate: {
-      type: Date,
-    },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
+
+    projectColor: {
+      gradient1: {
+        type: String,
+        match: /^#[0-9A-Fa-f]{6}$/,
+      },
+      gradient2: {
+        type: String,
+        match: /^#[0-9A-Fa-f]{6}$/,
+      },
     },
     members: [
       {
@@ -35,17 +32,22 @@ const projectSchema = new mongoose.Schema(
         },
         role: {
           type: String,
-          enum: ['member', 'admin'],
           default: 'member',
+        },
+        email: {
+          type: String,
+          required: false,
         },
       },
     ],
-    tasks: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Task',
-      },
-    ],
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true },
 );

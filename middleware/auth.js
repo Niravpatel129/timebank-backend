@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const authenticateUser = async (req, res, next) => {
-  console.log('🚀  req:', req);
   console.log('Entering authenticateUser middleware');
   if (!process.env.JWT_SECRET) {
     console.log('JWT_SECRET is not set');
