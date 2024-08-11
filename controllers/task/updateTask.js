@@ -4,6 +4,7 @@ const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
+    console.log('🚀  updateData:', updateData);
 
     // Check if taskDuration is being updated
     if (updateData.taskDuration) {
@@ -12,13 +13,18 @@ const updateTask = async (req, res) => {
         return res.status(404).json({ message: 'Task not found' });
       }
 
+      // Parse values to numbers before doing math
+      const remainingTime = parseFloat(task.timerState.remainingTime);
+      const oldTaskDuration = parseFloat(task.taskDuration);
+      const newTaskDuration = parseFloat(updateData.taskDuration);
+
       // Calculate the ratio of remaining time to original duration
-      const remainingRatio = task.timerState.remainingTime / (task.taskDuration * 60 * 1000);
+      const remainingRatio = remainingTime / (oldTaskDuration * 60 * 1000);
 
       // Update the remaining time based on the new duration
       updateData.timerState = {
         ...task.timerState,
-        remainingTime: Math.round(updateData.taskDuration * 60 * 1000 * remainingRatio),
+        remainingTime: Math.round(newTaskDuration * 60 * 1000 * remainingRatio),
       };
     }
 

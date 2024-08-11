@@ -4,6 +4,6 @@ const { getLastTwoMonthsTimeTrack } = require('../../controllers/timeTrack');
 const { authenticateUser } = require('../../middleware/auth');
 
 // Route to get time track data for the last two months
-router.get('/last-two-months', authenticateUser, getLastTwoMonthsTimeTrack);
+router.get('/last-two-months/:projectId?', authenticateUser, getLastTwoMonthsTimeTrack);
 
 module.exports = router;
