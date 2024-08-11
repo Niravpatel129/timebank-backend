@@ -1,4 +1,5 @@
 const Task = require('../../models/taskModel');
+const { updateTimeTrack } = require('../../utils/updateTimeTrack');
 
 const pauseTaskTimer = async (req, res) => {
   try {
@@ -16,6 +17,9 @@ const pauseTaskTimer = async (req, res) => {
 
     const elapsedTimeInSeconds = Math.floor((new Date() - task.timerState.startTime) / 1000);
     task.timeSpent += elapsedTimeInSeconds;
+
+    await updateTimeTrack(task.user, task._id, task.project, elapsedTimeInSeconds);
+
     task.timerState.remainingTime = remainingTime;
     task.timerState.isActive = false;
     task.status = 'paused';
