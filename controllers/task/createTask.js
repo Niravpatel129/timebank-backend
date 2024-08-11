@@ -2,7 +2,10 @@ const Task = require('../../models/taskModel');
 
 const createTask = async (req, res) => {
   try {
-    const { name, category, taskDuration, status, date } = req.body;
+    const { name, category, taskDuration, status, date, project } = req.body;
+    if (!project) {
+      return res.status(400).json({ message: 'Project is required' });
+    }
     const userId = req.user.id; // Assuming user ID is available in req.user after authentication
     const initalTaskDuration = taskDuration;
 
@@ -12,6 +15,7 @@ const createTask = async (req, res) => {
       taskDuration,
       status,
       date,
+      project,
       user: userId,
       timerState: {
         startTime: null,

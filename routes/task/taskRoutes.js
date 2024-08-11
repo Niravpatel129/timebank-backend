@@ -14,7 +14,7 @@ const {
 } = require('../../controllers/task');
 
 // Get all tasks
-router.get('/', authenticateUser, getAllTasks);
+router.get('/:projectId', authenticateUser, getAllTasks);
 
 // Create a new task
 router.post('/', authenticateUser, createTask);
