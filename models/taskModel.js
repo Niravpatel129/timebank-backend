@@ -49,7 +49,7 @@ const taskSchema = new mongoose.Schema(
       type: Date,
       required: false,
     },
-    assignedTo: {
+    assignee: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: false,

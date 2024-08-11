@@ -2,7 +2,7 @@ const Task = require('../../models/taskModel');
 
 const createTask = async (req, res) => {
   try {
-    const { name, category, taskDuration, status, date, dateDue, project } = req.body;
+    const { name, category, taskDuration, status, date, dateDue, project, assignee } = req.body;
     if (!project) {
       return res.status(400).json({ message: 'Project is required' });
     }
@@ -18,6 +18,7 @@ const createTask = async (req, res) => {
       dateDue,
       project,
       user: userId,
+      assignee: assignee,
       timerState: {
         startTime: null,
         remainingTime: initalTaskDuration,
