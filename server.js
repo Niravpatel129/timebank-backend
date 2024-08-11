@@ -17,6 +17,7 @@ app.use(express.json());
 // app use userRoutes
 app.use('/user', require('./routes/user/userRoutes'));
 app.use('/tasks', require('./routes/task/taskRoutes'));
+app.use('/projects', require('./routes/project/projectRoutes'));
 
 // Connect to MongoDB
 mongoose

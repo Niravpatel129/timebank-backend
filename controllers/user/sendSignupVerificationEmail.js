@@ -1,3 +1,4 @@
+const Project = require('../../models/projectModel.js');
 const User = require('../../models/userModel.js');
 const sendEmail = require('../../service/sendEmail.js');
 
@@ -39,6 +40,13 @@ const sendSignupVerificationEmail = async (req, res) => {
         status: 'pending',
         onboardingData,
       });
+
+      const defaultProject = new Project({
+        name: 'Default Project',
+        user: user._id,
+      });
+
+      user.defaultProject = defaultProject._id;
 
       await user.save();
     }
