@@ -4,6 +4,7 @@ const pauseTaskTimer = async (req, res) => {
   try {
     const taskId = req.params.id;
     const task = await Task.findById(taskId);
+    const remainingTime = req.body.remainingTime;
 
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
@@ -15,11 +16,11 @@ const pauseTaskTimer = async (req, res) => {
 
     const elapsedTime = new Date() - task.timerState.startTime;
     task.timeSpent += elapsedTime;
-    task.timerState.remainingTime -= elapsedTime;
+    task.timerState.remainingTime = remainingTime;
     task.timerState.isActive = false;
     task.status = 'paused';
-
     await task.save();
+    console.log('🚀  task:', task);
 
     res.status(200).json(task);
   } catch (error) {
