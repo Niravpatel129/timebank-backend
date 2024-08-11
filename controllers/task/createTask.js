@@ -28,6 +28,9 @@ const createTask = async (req, res) => {
 
     const savedTask = await newTask.save();
 
+    // Populate the assignee field
+    await savedTask.populate('assignee', 'name email');
+
     res.status(201).json({
       success: true,
       data: savedTask,
