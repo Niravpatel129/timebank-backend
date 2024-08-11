@@ -14,8 +14,8 @@ const pauseTaskTimer = async (req, res) => {
       return res.status(400).json({ message: 'Timer is not active' });
     }
 
-    const elapsedTime = new Date() - task.timerState.startTime;
-    task.timeSpent += elapsedTime;
+    const elapsedTimeInSeconds = Math.floor((new Date() - task.timerState.startTime) / 1000);
+    task.timeSpent += elapsedTimeInSeconds;
     task.timerState.remainingTime = remainingTime;
     task.timerState.isActive = false;
     task.status = 'paused';

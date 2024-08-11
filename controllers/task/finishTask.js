@@ -10,8 +10,8 @@ const finishTask = async (req, res) => {
     }
 
     if (task.timerState.isActive) {
-      const elapsedTime = new Date() - task.timerState.startTime;
-      task.timeSpent += elapsedTime;
+      const elapsedTimeInSeconds = Math.floor((new Date() - task.timerState.startTime) / 1000);
+      task.timeSpent += elapsedTimeInSeconds;
     }
 
     task.status = 'completed';
