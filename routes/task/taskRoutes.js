@@ -11,6 +11,7 @@ const {
   pauseTaskTimer,
   resumeTaskTimer,
   finishTask,
+  updateTaskAssignee,
 } = require('../../controllers/task');
 
 // Get all tasks
@@ -39,5 +40,8 @@ router.post('/:id/resume', authenticateUser, resumeTaskTimer);
 
 // Finish task
 router.post('/:id/finish', authenticateUser, finishTask);
+
+// Update task assignee
+router.patch('/:id/assignee', authenticateUser, updateTaskAssignee);
 
 module.exports = router;

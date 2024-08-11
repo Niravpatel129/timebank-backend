@@ -16,7 +16,8 @@ const getAllTasks = async (req, res) => {
 
     const tasks = await Task.find({ user: userId, project: projectId })
       .sort({ date: -1 })
-      .populate('user', 'name email'); // Populate user field with name and email
+      .populate('user', 'name email')
+      .populate('assignee', 'name email'); // Populate assignee field with name and email
 
     const totalTimeSpent = tasks.reduce((acc, task) => acc + task.timeSpent, 0);
     console.log('🚀  totalTimeSpent:', totalTimeSpent);
