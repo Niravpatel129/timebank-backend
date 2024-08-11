@@ -15,12 +15,12 @@ const updateTaskStatus = async (req, res) => {
       });
     }
 
-    if (!['not-started', 'in-progress', 'completed'].includes(status)) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid status. Must be one of: not-started, in-progress, completed',
-      });
-    }
+    // if (!['not-started', 'in-progress', 'completed'].includes(status)) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: 'Invalid status. Must be one of: not-started, in-progress, completed',
+    //   });
+    // }
 
     task.status = status;
     const updatedTask = await task.save();

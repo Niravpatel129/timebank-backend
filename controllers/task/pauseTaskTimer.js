@@ -20,7 +20,6 @@ const pauseTaskTimer = async (req, res) => {
     task.timerState.isActive = false;
     task.status = 'paused';
     await task.save();
-    console.log('🚀  task:', task);
 
     res.status(200).json(task);
   } catch (error) {
