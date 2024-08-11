@@ -5,11 +5,7 @@ const updateTaskAssignee = async (req, res) => {
   const { assignee } = req.body;
 
   try {
-    const updatedTask = await Task.findByIdAndUpdate(
-      taskId,
-      { assignedTo: assignee },
-      { new: true },
-    );
+    const updatedTask = await Task.findByIdAndUpdate(taskId, { assignee: assignee }, { new: true });
     res.status(200).json(updatedTask);
   } catch (error) {
     console.error('Error in updateTaskAssignee:', error);
