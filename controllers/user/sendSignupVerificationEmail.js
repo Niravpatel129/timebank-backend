@@ -48,6 +48,7 @@ const sendSignupVerificationEmail = async (req, res) => {
 
       user.defaultProject = defaultProject._id;
 
+      await defaultProject.save();
       await user.save();
     }
 
