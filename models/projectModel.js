@@ -31,8 +31,8 @@ const projectSchema = new mongoose.Schema(
           ref: 'User',
         },
         role: {
-          type: String,
-          default: 'member',
+          type: mongoose.Schema.Types.Mixed,
+          default: { value: 'member', label: 'member' },
         },
         email: {
           type: String,
