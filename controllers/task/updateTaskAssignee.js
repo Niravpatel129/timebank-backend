@@ -10,7 +10,9 @@ const updateTaskAssignee = async (req, res) => {
     const updateData = assignee === null ? { $unset: { assignee: 1 } } : { assignee };
     console.log('Update data:', updateData);
 
-    const updatedTask = await Task.findByIdAndUpdate(taskId, updateData, { new: true });
+    const updatedTask = await Task.findByIdAndUpdate(taskId, updateData, { new: true })
+      .populate('user', 'name email')
+      .populate('assignee', 'name email');
     console.log('Updated task:', updatedTask);
 
     res.status(200).json(updatedTask);
