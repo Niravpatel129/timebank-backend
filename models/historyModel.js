@@ -8,7 +8,7 @@ const historySchema = new mongoose.Schema({
   },
   entityType: {
     type: String,
-    enum: ['Task', 'Project'],
+    enum: ['task', 'project', 'user'],
     required: true,
   },
   entityId: {
