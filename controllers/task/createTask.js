@@ -1,4 +1,5 @@
 const Task = require('../../models/taskModel');
+const Project = require('../../models/projectModel');
 
 const createTask = async (req, res) => {
   try {
@@ -27,6 +28,9 @@ const createTask = async (req, res) => {
     });
 
     const savedTask = await newTask.save();
+
+    // Update the project's updatedAt field
+    await Project.findByIdAndUpdate(project, { $set: { updatedAt: new Date() } });
 
     // Populate the assignee field
     await savedTask.populate('assignee', 'name email');
