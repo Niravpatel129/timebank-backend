@@ -42,9 +42,12 @@ const sendSignupVerificationEmail = async (req, res) => {
       });
 
       const defaultProject = new Project({
+        user: user._id,
         name: `${user.name}'s Project`,
         members: [{ user: user._id, role: 'owner' }],
         owner: user._id,
+        creator: user._id,
+        projectColor: ['#000000', '#000000'],
       });
 
       user.defaultProject = defaultProject._id;
