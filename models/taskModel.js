@@ -2,68 +2,8 @@ const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    category: {
-      type: String,
-      required: false,
-    },
-    listType: {
-      type: String,
-      default: 'currentWeek',
-    },
-    taskDuration: {
-      type: Number,
-      required: false,
-      min: 0,
-    },
-    status: {
-      type: String,
-      default: 'not-started',
-    },
-    timeSpent: {
-      type: Number,
-      default: 0,
-    },
-    timerState: {
-      isActive: {
-        type: Boolean,
-        default: false,
-      },
-      startTime: {
-        type: Date,
-      },
-      remainingTime: {
-        type: Number,
-        default: 0,
-      },
-    },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
-    dateDue: {
-      type: Date,
-      required: false,
-    },
-    assignee: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: false,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    project: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Project',
-      required: true,
-    },
+    // ... existing fields ...
+
     changeLog: [
       {
         field: String,
@@ -153,47 +93,7 @@ taskSchema.pre('save', function (next) {
   next();
 });
 
-// Helper method to get the old value
-taskSchema.methods.getOldValue = function (path) {
-  return this.get(path) !== this[path] ? this[path] : undefined;
-};
-
-// Pre-update middleware
-taskSchema.pre('findOneAndUpdate', function (next) {
-  const update = this.getUpdate();
-  const fieldsToTrack = ['name', 'category', 'timeSpent', 'status', 'assignee', 'dateDue'];
-  const logs = [];
-
-  fieldsToTrack.forEach((field) => {
-    if (update[field] !== undefined) {
-      logs.push({
-        field,
-        newValue: update[field],
-        changedBy: update.user, // Assuming you're passing the user ID in the update
-      });
-
-      if (field === 'status') {
-        this.update(
-          {},
-          {
-            $push: {
-              statusHistory: {
-                status: update[field],
-                changedBy: update.user,
-              },
-            },
-          },
-        );
-      }
-    }
-  });
-
-  if (logs.length > 0) {
-    this.update({}, { $push: { changeLog: { $each: logs } } });
-  }
-
-  next();
-});
+// ... existing helper methods and pre-update middleware ...
 
 // Method to add a time tracking event
 taskSchema.methods.addTimeTrackingEvent = function (action, duration, userId) {
