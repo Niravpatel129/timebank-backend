@@ -33,7 +33,7 @@ const createTask = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      data: savedTask,
+      task: savedTask,
       message: 'Task created successfully',
     });
   } catch (error) {
