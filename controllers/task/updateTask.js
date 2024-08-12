@@ -26,7 +26,9 @@ const updateTask = async (req, res) => {
       }
     }
 
-    const updatedTask = await Task.findByIdAndUpdate(id, updateData, { new: true });
+    const updatedTask = await Task.findByIdAndUpdate(id, updateData, { new: true })
+      .populate('user', 'name email')
+      .populate('assignee', 'name email');
 
     if (!updatedTask) {
       return res.status(404).json({ message: 'Task not found' });
