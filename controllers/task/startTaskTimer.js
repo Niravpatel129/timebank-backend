@@ -1,10 +1,13 @@
+const MetricsHelper = require('../../classes/MetricsHelper');
 const Task = require('../../models/taskModel');
 
 const startTaskTimer = async (req, res) => {
   try {
     console.log('Starting task timer...');
     const taskId = req.params.id;
+    const userId = req.user.id;
     console.log('Task ID:', taskId);
+
     const task = await Task.findById(taskId);
 
     if (!task) {
@@ -29,6 +32,9 @@ const startTaskTimer = async (req, res) => {
 
     await task.save();
     console.log('Task saved successfully');
+
+    // Update metrics
+    await MetricsHelper.updateTaskMetrics('start', taskId, userId, task.project);
 
     res.status(200).json(task);
   } catch (error) {

@@ -1,15 +1,11 @@
+// taskActivityModel.js
+
 const mongoose = require('mongoose');
 
 const taskActivitySchema = new mongoose.Schema(
   {
-    task: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Task',
-      required: true,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+    activityType: {
+      type: String,
       required: true,
     },
     project: {
@@ -17,32 +13,67 @@ const taskActivitySchema = new mongoose.Schema(
       ref: 'Project',
       required: true,
     },
-    activityType: {
-      type: String,
-      enum: ['started', 'paused', 'resumed', 'finished', 'break_started', 'break_ended'],
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
-    timestamp: {
-      type: Date,
-      default: Date.now,
+    task: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Task',
+      required: true,
     },
-    duration: {
+    startCount: {
       type: Number,
       default: 0,
     },
-    remainingTime: {
+    pauseCount: {
       type: Number,
       default: 0,
     },
-    mood: {
-      type: String,
-      enum: ['productive', 'neutral', 'distracted'],
+    resumeCount: {
+      type: Number,
+      default: 0,
     },
+    completionCount: {
+      type: Number,
+      default: 0,
+    },
+    breakCount: {
+      type: Number,
+      default: 0,
+    },
+    lastStartTime: Date,
+    lastPauseTime: Date,
+    lastResumeTime: Date,
+    lastCompletionTime: Date,
+    totalTimeSpent: {
+      type: Number,
+      default: 0,
+    },
+    avgSessionDuration: Number,
+    totalBreakTime: {
+      type: Number,
+      default: 0,
+    },
+    avgBreakDuration: Number,
+    sessionHistory: [
+      {
+        startTime: Date,
+        endTime: Date,
+        duration: Number,
+      },
+    ],
+    breakHistory: [
+      {
+        startTime: Date,
+        endTime: Date,
+        duration: Number,
+      },
+    ],
   },
   { timestamps: true },
 );
-
-taskActivitySchema.index({ task: 1, user: 1, project: 1, activityType: 1, timestamp: -1 });
 
 const TaskActivity = mongoose.model('TaskActivity', taskActivitySchema);
 

@@ -3,6 +3,7 @@ const getProjects = require('./getProjects.js');
 const getProject = require('./getProject.js');
 const updateProject = require('./updateProject.js');
 const deleteProject = require('./deleteProject.js');
+const getProjectMetrics = require('./getProjectMetrics.js');
 
 module.exports = {
   createProject,
@@ -10,4 +11,5 @@ module.exports = {
   getProject,
   updateProject,
   deleteProject,
+  getProjectMetrics,
 };
