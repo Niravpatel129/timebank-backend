@@ -16,7 +16,13 @@ const createProject = async (req, res) => {
 
     const savedProject = await newProject.save();
 
-    res.status(201).json(savedProject);
+    // Populate the members.user field
+    const populatedProject = await Project.findById(savedProject._id).populate(
+      'members.user',
+      'name',
+    );
+
+    res.status(201).json(populatedProject);
   } catch (error) {
     console.error('Error in createProject:', error);
     res.status(500).json({ message: 'Server error' });
