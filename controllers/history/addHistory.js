@@ -4,7 +4,7 @@ const User = require('../../models/userModel');
 const addHistory = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { entityType, entityId, entityName, action, details } = req.body;
+    const { entityType, entityId, entityName, action, details, projectId } = req.body;
 
     // Validate the user exists
     const user = await User.findById(userId);
@@ -19,6 +19,7 @@ const addHistory = async (req, res) => {
       entityName,
       action,
       details,
+      projectId,
     });
 
     await historyEntry.save();
