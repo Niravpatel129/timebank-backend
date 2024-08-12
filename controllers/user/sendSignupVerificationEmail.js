@@ -47,7 +47,7 @@ const sendSignupVerificationEmail = async (req, res) => {
         members: [{ user: user._id, role: 'owner' }],
         owner: user._id,
         creator: user._id,
-        projectColor: ['#000000', '#000000'],
+        projectColor: { gradient1: '#FFCC00', gradient2: '#FF9900' },
       });
 
       user.defaultProject = defaultProject._id;
