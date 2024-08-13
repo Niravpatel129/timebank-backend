@@ -8,7 +8,7 @@ const createTask = async (req, res) => {
     if (!project) {
       return res.status(400).json({ message: 'Project is required' });
     }
-    const userId = req.user.id; // Assuming user ID is available in req.user after authentication
+    const userId = req.user.id;
     const initalTaskDuration = taskDuration;
 
     const newTask = new Task({

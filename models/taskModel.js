@@ -11,6 +11,11 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    timerType: {
+      type: String,
+      required: false,
+      default: 'countup',
+    },
     listType: {
       type: String,
       default: 'currentWeek',
