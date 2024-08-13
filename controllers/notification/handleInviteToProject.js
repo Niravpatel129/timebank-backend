@@ -37,14 +37,14 @@ const handleInviteToProject = async (req, res) => {
     }
 
     // Check if the user is already a member of the project
-    if (invitedUser) {
-      const isAlreadyMember = project.members.some(
-        (member) => member.user.toString() === invitedUser._id.toString(),
-      );
-      if (isAlreadyMember) {
-        return res.status(400).json({ message: 'User is already a member of this project' });
-      }
-    }
+    // if (invitedUser) {
+    //   const isAlreadyMember = project.members.some(
+    //     (member) => member.user.toString() === invitedUser._id.toString(),
+    //   );
+    //   if (isAlreadyMember) {
+    //     return res.status(400).json({ message: 'User is already a member of this project' });
+    //   }
+    // }
 
     // Create a new notification
     const notification = new Notification({
