@@ -20,6 +20,7 @@ app.use('/tasks', require('./routes/task/taskRoutes'));
 app.use('/projects', require('./routes/project/projectRoutes'));
 app.use('/timeTrack', require('./routes/timeTrack/timeTrackRoutes'));
 app.use('/history', require('./routes/history/historyRoutes.js'));
+app.use('/notification', require('./routes/notification/notificationRoutes.js'));
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
