@@ -1,6 +1,7 @@
 const Project = require('../../models/projectModel');
 const Notification = require('../../models/notificationModel');
 const User = require('../../models/userModel');
+const sendEmail = require('../../service/sendEmail');
 
 const handleInviteToProject = async (req, res) => {
   try {
@@ -11,6 +12,7 @@ const handleInviteToProject = async (req, res) => {
     // Check if the project exists
     const project = await Project.findById(projectId);
     if (!project) {
+      console.log('Project not found');
       return res.status(404).json({ message: 'Project not found' });
     }
 
@@ -25,20 +27,29 @@ const handleInviteToProject = async (req, res) => {
     // Check if the invited user exists
     const invitedUser = await User.findOne({ email: invitedUserEmail });
     if (!invitedUser) {
-      return res.status(404).json({ message: 'Invited user not found' });
+      console.log('Invited user not found');
+      // send email to inviting user
+      sendEmail(invitedUserEmail, 'projectInvitation', {
+        inviterName: req.user.name,
+        projectName: project.name,
+        invitationUrl: `${process.env.FRONTEND_URL}/project/${projectId}/invitation`,
+      });
     }
 
     // Check if the user is already a member of the project
-    const isAlreadyMember = project.members.some(
-      (member) => member.user.toString() === invitedUser._id.toString(),
-    );
-    if (isAlreadyMember) {
-      return res.status(400).json({ message: 'User is already a member of this project' });
+    if (invitedUser) {
+      const isAlreadyMember = project.members.some(
+        (member) => member.user.toString() === invitedUser._id.toString(),
+      );
+      if (isAlreadyMember) {
+        return res.status(400).json({ message: 'User is already a member of this project' });
+      }
     }
 
     // Create a new notification
     const notification = new Notification({
-      recipient: invitedUser._id,
+      recipient: invitedUser ? invitedUser?._id : invitingUserId,
+      email: invitedUser ? invitedUser?.email : invitedUserEmail,
       type: 'project_invitation',
       content: `You have been invited to join the project "${project.name}"`,
       relatedProject: projectId,

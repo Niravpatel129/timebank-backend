@@ -36,6 +36,27 @@ const emailTemplates = {
       </div>
     `,
   }),
+  projectInvitation: (data) => ({
+    subject: 'Invitation to join a project on Hour Block',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid black; margin: 0 auto;"></div>
+        </div>
+        <h2 style="text-align: center; color: #000;">You've been invited to join a project on Hour Block</h2>
+        <p>Hello,</p>
+        <p>${data.inviterName} has invited you to join the project "${data.projectName}" on Hour Block.</p>
+        <p>To accept this invitation and join the project, please click the button below:</p>
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="${data.invitationUrl}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; display: inline-block;">ACCEPT INVITATION</a>
+        </div>
+        <p>Or copy and paste this URL into a new tab of your browser:</p>
+        <p><a href="${data.invitationUrl}" style="color: #0070f3; word-break: break-all;">${data.invitationUrl}</a></p>
+        <p>If you don't have an Hour Block account, you'll be able to create one after clicking the link.</p>
+        <p style="color: #666; font-size: 0.9em;">If you didn't expect this invitation or don't want to join the project, you can safely ignore this email. If you have any questions, please visit our Help page to get in touch with us.</p>
+      </div>
+    `,
+  }),
   // Add more email templates here as needed
 };
 
