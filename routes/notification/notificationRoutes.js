@@ -8,4 +8,16 @@ router.post('/project-invitation', authenticateUser, notificationController.hand
 
 router.get('/', authenticateUser, notificationController.getNotifications);
 
+// project
+router.post(
+  '/project/decline-invitation',
+  authenticateUser,
+  notificationController.declineInviteToProject,
+);
+router.post(
+  '/project/accept-invitation',
+  authenticateUser,
+  notificationController.acceptInviteToProject,
+);
+
 module.exports = router;
