@@ -3,7 +3,8 @@ const Project = require('../../models/projectModel');
 
 const createTask = async (req, res) => {
   try {
-    const { name, category, taskDuration, status, date, dateDue, project, assignee } = req.body;
+    const { name, category, taskDuration, status, date, dateDue, project, assignee, timerType } =
+      req.body;
     if (!project) {
       return res.status(400).json({ message: 'Project is required' });
     }
@@ -18,6 +19,7 @@ const createTask = async (req, res) => {
       date,
       dateDue,
       project,
+      timerType,
       user: userId,
       assignee: assignee,
       timerState: {
