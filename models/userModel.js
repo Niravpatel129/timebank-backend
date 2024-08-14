@@ -33,6 +33,12 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
   },
+  loginCode: {
+    type: String,
+  },
+  loginCodeExpires: {
+    type: Date,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

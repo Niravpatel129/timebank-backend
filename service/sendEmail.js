@@ -57,6 +57,29 @@ const emailTemplates = {
       </div>
     `,
   }),
+  loginCodeEmail: (data) => ({
+    subject: 'Your Login Code for Hour Block',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 20px solid black; margin: 0 auto;"></div>
+        </div>
+        <h2 style="text-align: center; color: #000;">Your Login Code for Hour Block</h2>
+        <p>Hello ${data.name},</p>
+        <p>We have received a login request for your Hour Block account. Here's your login code:</p>
+        <div style="background-color: #f4f4f4; padding: 10px; text-align: center; margin: 20px 0;">
+          <strong>${data.loginCode}</strong>
+        </div>
+        <p>To complete the login process, please click the button below:</p>
+        <div style="text-align: center; margin: 20px 0;">
+          <a href="${data.loginUrl}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; display: inline-block;">LOGIN</a>
+        </div>
+        <p>Or copy and paste this URL into a new tab of your browser:</p>
+        <p><a href="${data.loginUrl}" style="color: #0070f3; word-break: break-all;">${data.loginUrl}</a></p>
+        <p style="color: #666; font-size: 0.9em;">If you didn't request this login code, please ignore this email. If you are concerned about your account's safety, please visit our Help page to get in touch with us.</p>
+      </div>
+    `,
+  }),
   // Add more email templates here as needed
 };
 
