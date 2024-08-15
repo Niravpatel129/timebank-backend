@@ -11,6 +11,11 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    tagColor: {
+      type: String,
+      default: '#E6E6FA', // Soft purple color
+      required: false,
+    },
     timerType: {
       type: String,
       required: false,
