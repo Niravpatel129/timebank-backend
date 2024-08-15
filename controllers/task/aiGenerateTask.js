@@ -50,7 +50,11 @@ const aiGenerateTask = async (req, res) => {
             "priority": "...",
             "description": "..."
           }
-          Note: If timerType is "countup", omit the "duration" field. Ensure the taskName starts with a verb and is in a "to-do" format. Do not include any markdown formatting in your response.`,
+          Note: If timerType is "countup", omit the "duration" field. Ensure the taskName starts with a verb and is in a "to-do" format. The taskName should be concise, no longer than 6 words, and worded naturally as a human would write it. Do not include any markdown formatting in your response.`,
+        },
+        {
+          role: 'system',
+          content: `Remember to keep the taskName short, clear, and action-oriented. Avoid unnecessary words or overly formal language. For example, prefer "Write project proposal" over "Compose and finalize a comprehensive project proposal document".`,
         },
       ],
     });
@@ -76,6 +80,11 @@ const aiGenerateTask = async (req, res) => {
         if (typeof aiResponse.duration !== 'number' || aiResponse.duration <= 0) {
           throw new Error('Invalid duration for countdown timer');
         }
+      }
+
+      // Additional check for taskName length
+      if (aiResponse.taskName.split(' ').length > 6) {
+        throw new Error('Task name is too long');
       }
     } catch (error) {
       console.error('Error parsing or validating AI response:', error);
