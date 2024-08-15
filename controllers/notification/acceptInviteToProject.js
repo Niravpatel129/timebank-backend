@@ -39,16 +39,16 @@ const acceptInviteToProject = async (req, res) => {
     }
 
     // Check if the user is already a member of the project
-    const isAlreadyMember = project.members.some(
-      (member) => member.user.toString() === user._id.toString(),
-    );
+    // const isAlreadyMember = project.members.some(
+    //   (member) => member.user.toString() === user._id.toString(),
+    // );
 
-    if (isAlreadyMember) {
-      // If already a member, just update the notification status
-      notification.invitationStatus = 'accepted';
-      await notification.save();
-      return res.status(200).json({ message: 'You are already a member of this project' });
-    }
+    // if (isAlreadyMember) {
+    //   // If already a member, just update the notification status
+    //   notification.invitationStatus = 'accepted';
+    //   await notification.save();
+    //   return res.status(200).json({ message: 'You are already a member of this project' });
+    // }
 
     // Update the notification status to accepted
     notification.invitationStatus = 'accepted';
