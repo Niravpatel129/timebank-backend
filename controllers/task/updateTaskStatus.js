@@ -4,9 +4,8 @@ const updateTaskStatus = async (req, res) => {
   try {
     const taskId = req.params.id;
     const { status } = req.body;
-    const userId = req.user.id; // Assuming user ID is available in req.user after authentication
 
-    const task = await Task.findOne({ _id: taskId, user: userId })
+    const task = await Task.findOne({ _id: taskId })
       .populate('user', 'name email')
       .populate('assignee', 'name email');
 
@@ -17,13 +16,6 @@ const updateTaskStatus = async (req, res) => {
         message: 'Task not found or you do not have permission to update this task',
       });
     }
-
-    // if (!['not-started', 'in-progress', 'completed'].includes(status)) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: 'Invalid status. Must be one of: not-started, in-progress, completed',
-    //   });
-    // }
 
     task.status = status;
     const updatedTask = await task.save();

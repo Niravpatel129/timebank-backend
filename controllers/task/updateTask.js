@@ -6,8 +6,6 @@ const updateTask = async (req, res) => {
 
     const { id } = req.params;
     const updateData = req.body;
-    console.log('🚀  updateData:', updateData);
-    console.log('🚀  updateData:', updateData);
 
     // Check if taskDuration is being updated
     if (updateData.taskDuration) {
