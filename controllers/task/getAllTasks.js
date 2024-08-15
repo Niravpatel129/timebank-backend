@@ -14,7 +14,7 @@ const getAllTasks = async (req, res) => {
       });
     }
 
-    const tasks = await Task.find({ user: userId, project: projectId })
+    const tasks = await Task.find({ project: projectId })
       .sort({ date: -1 })
       .populate('user', 'name email')
       .populate('assignee', 'name email'); // Populate assignee field with name and email
