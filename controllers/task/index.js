@@ -9,4 +9,5 @@ module.exports = {
   resumeTaskTimer: require('./resumeTaskTimer.js'),
   finishTask: require('./finishTask.js'),
   updateTaskAssignee: require('./updateTaskAssignee.js'),
+  aiGenerateTask: require('./aiGenerateTask.js'),
 };

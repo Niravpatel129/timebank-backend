@@ -12,6 +12,7 @@ const {
   resumeTaskTimer,
   finishTask,
   updateTaskAssignee,
+  aiGenerateTask,
 } = require('../../controllers/task');
 
 // Get all tasks
@@ -43,5 +44,7 @@ router.post('/:id/finish', authenticateUser, finishTask);
 
 // Update task assignee
 router.patch('/:id/assignee', authenticateUser, updateTaskAssignee);
+
+router.post('/ai-generate-task', authenticateUser, aiGenerateTask);
 
 module.exports = router;
