@@ -2,6 +2,8 @@ const Task = require('../../models/taskModel');
 
 const updateTask = async (req, res) => {
   try {
+    console.log('🚀  updateTask:', req.body);
+
     const { id } = req.params;
     const updateData = req.body;
     console.log('🚀  updateData:', updateData);
