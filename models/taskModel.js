@@ -73,6 +73,10 @@ const taskSchema = new mongoose.Schema(
       ref: 'Project',
       required: true,
     },
+    taskBoardOrder: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );
