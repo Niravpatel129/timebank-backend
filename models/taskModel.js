@@ -11,6 +11,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    listOrder: {
+      type: Number,
+      default: 0,
+    },
     tagColor: {
       type: String,
       default: '#E6E6FA', // Soft purple color
