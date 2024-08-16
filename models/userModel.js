@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  lastActive: {
+    type: Date,
+    default: Date.now,
+  },
   name: {
     type: String,
   },

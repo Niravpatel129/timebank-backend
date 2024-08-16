@@ -13,6 +13,7 @@ const {
   finishTask,
   updateTaskAssignee,
   aiGenerateTask,
+  moveTask,
 } = require('../../controllers/task');
 
 // Get all tasks
@@ -46,5 +47,7 @@ router.post('/:id/finish', authenticateUser, finishTask);
 router.patch('/:id/assignee', authenticateUser, updateTaskAssignee);
 
 router.post('/ai-generate-task', authenticateUser, aiGenerateTask);
+
+router.patch('/:id/move', authenticateUser, moveTask);
 
 module.exports = router;

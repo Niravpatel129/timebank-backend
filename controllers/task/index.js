@@ -10,4 +10,5 @@ module.exports = {
   finishTask: require('./finishTask.js'),
   updateTaskAssignee: require('./updateTaskAssignee.js'),
   aiGenerateTask: require('./aiGenerateTask.js'),
+  moveTask: require('./moveTask.js'),
 };
