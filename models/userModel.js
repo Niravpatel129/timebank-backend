@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     unique: true,
     trim: true,
     lowercase: true,
+    maxlength: 255, // Adding max length for email
   },
   lastActive: {
     type: Date,
@@ -14,10 +15,12 @@ const userSchema = new mongoose.Schema({
   },
   name: {
     type: String,
+    maxlength: 100, // Adding max length for name
   },
   password: {
     type: String,
     required: true,
+    maxlength: 128, // Adding max length for password (hashed)
   },
   emailVerified: {
     type: Boolean,
@@ -25,6 +28,7 @@ const userSchema = new mongoose.Schema({
   },
   verificationCode: {
     type: String,
+    maxlength: 64, // Adding max length for verification code
   },
   onboardingData: {
     type: mongoose.Schema.Types.Mixed,
@@ -32,6 +36,7 @@ const userSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    maxlength: 50, // Adding max length for status
   },
   defaultProject: {
     type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +44,7 @@ const userSchema = new mongoose.Schema({
   },
   loginCode: {
     type: String,
+    maxlength: 64, // Adding max length for login code
   },
   loginCodeExpires: {
     type: Date,

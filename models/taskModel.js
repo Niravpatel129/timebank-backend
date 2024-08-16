@@ -6,19 +6,23 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      maxlength: 255, // Adding a max length for the task name
     },
     category: {
       type: String,
       required: false,
+      maxlength: 100, // Adding a max length for the category
     },
     listOrder: {
       type: Number,
       default: 0,
+      max: 1000000, // Adding a max value for list order
     },
     tagColor: {
       type: String,
       default: '#E6E6FA', // Soft purple color
       required: false,
+      maxlength: 7, // Ensuring the color code doesn't exceed 7 characters
     },
     timerType: {
       type: String,
@@ -28,11 +32,13 @@ const taskSchema = new mongoose.Schema(
     listType: {
       type: String,
       default: 'currentWeek',
+      maxlength: 50, // Adding a max length for list type
     },
     taskDuration: {
       type: Number,
       required: false,
       min: 0,
+      max: 86400, // Max duration of 24 hours (in seconds)
     },
     status: {
       type: String,
@@ -41,6 +47,7 @@ const taskSchema = new mongoose.Schema(
     timeSpent: {
       type: Number,
       default: 0,
+      max: 86400, // Max time spent of 24 hours (in seconds)
     },
     timerState: {
       isActive: {
@@ -53,10 +60,12 @@ const taskSchema = new mongoose.Schema(
       remainingTime: {
         type: Number,
         default: 0,
+        max: 86400, // Max remaining time of 24 hours (in seconds)
       },
       timeUsed: {
         type: Number,
         default: 0,
+        max: 86400, // Max time used of 24 hours (in seconds)
       },
     },
     date: {
@@ -85,10 +94,13 @@ const taskSchema = new mongoose.Schema(
     taskBoardOrder: {
       type: Number,
       default: 0,
+      max: 1000000, // Adding a max value for task board order
     },
     taskPriority: {
       type: Number,
       default: 0,
+      min: 0,
+      max: 10, // Setting a max priority level
     },
   },
   { timestamps: true },
