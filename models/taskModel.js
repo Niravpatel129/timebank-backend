@@ -47,7 +47,6 @@ const taskSchema = new mongoose.Schema(
     timeSpent: {
       type: Number,
       default: 0,
-      max: 86400, // Max time spent of 24 hours (in seconds)
     },
     timerState: {
       isActive: {
